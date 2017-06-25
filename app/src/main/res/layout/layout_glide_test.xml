@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_naver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="네이버" />
+
+    <Button
+        android:id="@+id/btn_daum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:text="다음" />
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="카카오"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="5dp"
+        android:singleLine="true"/>
+
+    <Button
+        android:id="@+id/btn_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="50dp"
+        android:text="local" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_obj"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp" />
+
+</FrameLayout>
