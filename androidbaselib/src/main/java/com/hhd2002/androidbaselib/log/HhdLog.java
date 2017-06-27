@@ -134,8 +134,8 @@ public class HhdLog {
         Date now = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd|HH:mm:ss");
         String nowDateTimeStr = sdf.format(now);
-        log = String.format("TID[%04d] %s", tid, log);
-        String decoLog = String.format("[%s][%s][%s]%s", logLevel, nowDateTimeStr, tag, log);
+        log = String.format("CALL[tag]TID[%04d] %s", tag, tid, log);
+        String decoLog = String.format("[%s][%s]%s", logLevel, nowDateTimeStr, log);
 
         switch (logLevel) {
             case "ERROR":
@@ -160,7 +160,7 @@ public class HhdLog {
 
         LevelAndLog laLog = new LevelAndLog();
         laLog.level = logLevel;
-        laLog.log = decoLog;
+        laLog.log = log;
         _logCache4Azure.add(laLog);
     }
 

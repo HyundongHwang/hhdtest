@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="realm_red">#f0727d</color>
     <color name="realm_blue">#428bca</color>
+    <color name="fcm_notification_bg">#428bca</color>
 </resources>

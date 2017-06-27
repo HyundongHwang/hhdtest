@@ -54,6 +54,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
     annotationProcessor 'org.parceler:parceler:1.1.8'
+
     implementation 'com.android.support:appcompat-v7:25.4.0'
     implementation 'com.android.support:gridlayout-v7:25.4.0'
     implementation 'com.android.support:mediarouter-v7:25.4.0'
@@ -61,16 +62,20 @@ dependencies {
     implementation 'com.android.support:support-v4:25.4.0'
     implementation 'com.android.support:support-vector-drawable:25.4.0'
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.0.pr3'
     implementation 'com.github.bumptech.glide:glide:4.0.0-RC0'
     implementation 'com.squareup.okhttp3:okhttp:3.8.0'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'org.parceler:parceler-api:1.1.8'
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.google.android.gms:play-services-maps:11.0.1'
     implementation 'com.google.android.gms:play-services-auth:11.0.1'
     implementation 'com.android.support:multidex:1.0.1'
     implementation 'com.google.firebase:firebase-messaging:11.0.1'
+    implementation 'com.google.code.gson:gson:2.8.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+
     implementation project(':hhdlib')
     implementation project(':icndb')
     implementation project(':androidbaselib')

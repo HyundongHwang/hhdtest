@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hhd2002.androidbaselib.HhdUtil;
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
 import com.hhd2002.hhdtest.R;
@@ -90,7 +91,7 @@ public class EventBusTestActivity
     }
 
     private void updateUiByMyEvent(MyEvent event) {
-        String log = "event : " + HhdUtil.convertToJsonStr(event);
+        String log = "event : " + new Gson().toJson(event);
         Log.i("hhddebug", log);
         tvResult.setText(log);
     }

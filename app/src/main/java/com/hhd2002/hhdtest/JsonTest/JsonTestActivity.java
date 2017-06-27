@@ -2,19 +2,11 @@ package com.hhd2002.hhdtest.JsonTest;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.hhd2002.androidbaselib.HhdSampleUiHelper;
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,6 +20,7 @@ public class JsonTestActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        HhdSampleUiHelper hhdSampleUiHelper = new HhdSampleUiHelper(this);
 
         AAA obj = new AAA();
         obj.overwrite_d_day = "asdfjalsf";
@@ -57,37 +50,18 @@ public class JsonTestActivity
         obj.fff.put("asdfasdf", "ㅁㅎㄹㅇㅎㅇㄹㄴㅎㅇㄴㅎ");
         obj.fff.put("asdfasdf", "ㅁㅎㄹㅇㅎㅇㄹㄴㅎㅇㄴㅎ");
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, false)
-                .configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true)
-                .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true)
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
-        mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String objStr = gson.toJson(obj);
+        hhdSampleUiHelper.writeLog(String.format("objStr : %s", objStr));
 
-        String str = "";
-        AAA2 obj3 = null;
+        String obj2Str = gson.toJson(obj2);
+        hhdSampleUiHelper.writeLog(String.format("obj2Str : %s", obj2Str));
 
-        try {
-            str = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        AAA aaa = gson.fromJson(objStr, AAA.class);
+        hhdSampleUiHelper.writeLog(String.format("aaa : %d", aaa.hashCode()));
 
-        try {
-            obj3 = mapper.readValue(str, AAA2.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        String str2 = "{\n:    a\n:        b\n:\tc\n:\t\td\n:}";
-        Log.e("", str2);
-
-        int d = 0;
-
+        BBB bbb = gson.fromJson(obj2Str, BBB.class);
+        hhdSampleUiHelper.writeLog(String.format("bbb : %d", bbb.hashCode()));
     }
 
     @Override

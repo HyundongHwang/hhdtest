@@ -19,17 +19,7 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-
 import java.io.File;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,54 +42,15 @@ public class HhdUtil {
     private static final long MILLISECONS_PER_DAY = 24 * 60 * 60 * 1000;
     private static final long MAX_FILE_EXPIRE_TIME = 20 * MILLISECONS_PER_DAY;
 
-    private static ObjectMapper objectMapper;
     private static Display display;
     private static HashMap<String, SPrefModel> sPrefCache = new HashMap<>();
     private static DateFormat mediumDateFormat;
     private static Locale mediumDateFormatLocale;
 
 
-    static {
-        objectMapper = new ObjectMapper();
-        objectMapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, false)
-                .configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true)
-                .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true)
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
-        objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-
-        mediumDateFormatLocale = Locale.getDefault();
-        mediumDateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, mediumDateFormatLocale);
-    }
-
-
     public static ArrayList<File> getAllExternalFiles() {
         ArrayList<File> files = new ArrayList<File>();
         return traverseDir(new File(Environment.getExternalStorageDirectory().getAbsolutePath()), files);
-    }
-
-    public static <T> String convertToJsonStr(T obj) {
-        String str = null;
-
-        try {
-            str = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        return str;
-    }
-
-    public static <T> T convertToObject(String jsonStr, Class<T> aClass) {
-        T obj = null;
-
-        try {
-            obj = objectMapper.readValue(jsonStr, aClass);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return obj;
     }
 
     public static boolean isStringNullOrEmpty(String str) {

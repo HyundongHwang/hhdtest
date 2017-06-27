@@ -2,9 +2,7 @@
 
 
 
-ls "$PSScriptRoot\*.properties.ps1" | foreach {
-    . $_.FullName
-}
+. .\hhd-azure-log-securekeys.ps1
 
 
 
@@ -64,12 +62,12 @@ function hhd-azure-log-get-log
         [System.String]
         $TABLE_NAME,
   
-        [Parameter(Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelinebyPropertyName=$true)]
+        [Parameter(Mandatory=$false, ValueFromPipeline=$true, ValueFromPipelinebyPropertyName=$true)]
         [ValidateSet("ERROR","WARNI","INFOR","DEBUG","VERBO")]
         [System.String]
         $LOG_LEVEL,
 
-        [Parameter(Mandatory=$true, ValueFromPipeline=$true, ValueFromPipelinebyPropertyName=$true)]
+        [Parameter(Mandatory=$false, ValueFromPipeline=$true, ValueFromPipelinebyPropertyName=$true)]
         [switch]
         $KEEP_MONITOR = $false
     )
@@ -215,3 +213,8 @@ function hhd-azure-log-remove-table
     $context = New-AzureStorageContext $STORAGE_ACCOUNT_NAME -StorageAccountKey $STORAGE_ACCOUNT_KEY
     Remove-AzureStorageTable -Name $TABLE_NAME -Context $context
 }
+
+
+
+
+hhd-module-install-import -MODULE_NAME Azure.Storage

@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.hhd2002.androidbaselib.HhdUtil;
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
 import com.hhd2002.hhdtest.R;
@@ -233,10 +234,10 @@ public class GlideTestActivity
 
             Response res = client.newCall(req).execute();
             String resStr = res.body().string();
-            DaumModels.Rss rss = HhdUtil.convertToObject(resStr, DaumModels.Rss.class);
+            DaumModels daumModels = new Gson().fromJson(resStr, DaumModels.class);
             adapter.items.clear();
 
-            for (DaumModels.Item item : rss.channel.item) {
+            for (DaumModels.Item item : daumModels.channel.item) {
                 Item newItem = new Item();
                 adapter.items.add(newItem);
                 newItem.thumbnailUrl = item.thumbnail;

@@ -13,13 +13,13 @@ public class HhdLogTestActivity
         extends AppCompatActivity
         implements IHhdSampleActivity {
 
-    public static final String AZURE_STORAGE_CONNECTION_STRING =
-            "DefaultEndpointsProtocol=https;AccountName=hhdandroidtest;AccountKey=zJpcXJNUuvir9ucBO2WuxfDf/bFUfpnATKgNfRI28ByBJrgMzAuiQcY/2ma6udxuvCvnPFWPLf0exIK3n1XbsQ==;EndpointSuffix=core.windows.net";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        HhdLog.init(getBaseContext(), AZURE_STORAGE_CONNECTION_STRING);
+
+        //"DefaultEndpointsProtocol=https;AccountName=hhdandroidtest;AccountKey=zJpcXJ...;EndpointSuffix=core.windows.net";
+        HhdLog.init(getBaseContext(), MyAzureSecureKeys.AZURE_STORAGE_CONNECTION_STRING);
         HhdSampleUiHelper uiHelper = new HhdSampleUiHelper(this);
 
         uiHelper.addSimpleBtn("write log to azure hello world", (View v) -> {

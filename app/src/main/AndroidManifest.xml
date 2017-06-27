@@ -82,13 +82,28 @@
         <activity android:name=".HhdLogTest.HhdLogTestActivity" />
 
 
-
         <activity android:name=".ServiceTest.MyServiceActivity" />
         <activity android:name=".FcmTest.FcmTestActivity" />
 
-        <service android:name=".ServiceTest.MyService"
+        <service
+            android:name=".ServiceTest.MyService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true" />
+
+        <service
+            android:name=".FcmTest.MyFcmService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".FcmTest.MyFcmInstanceService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

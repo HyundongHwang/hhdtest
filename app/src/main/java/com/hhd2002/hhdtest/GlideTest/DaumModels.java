@@ -3,9 +3,7 @@ package com.hhd2002.hhdtest.GlideTest;
 import java.util.ArrayList;
 
 public class DaumModels {
-    public static class Rss {
-        public Channel channel;
-    }
+    public Channel channel;
 
     public static class Channel {
         public int result;

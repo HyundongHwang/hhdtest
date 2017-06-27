@@ -1,2 +1,0 @@
-﻿$STORAGE_ACCOUNT_NAME = "hhdandroidtest"
-$STORAGE_ACCOUNT_KEY = "zJpcXJNUuvir9ucBO2WuxfDf/bFUfpnATKgNfRI28ByBJrgMzAuiQcY/2ma6udxuvCvnPFWPLf0exIK3n1XbsQ=="
