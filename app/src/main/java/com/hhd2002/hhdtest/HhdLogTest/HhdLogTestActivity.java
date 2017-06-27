@@ -17,9 +17,6 @@ public class HhdLogTestActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //"DefaultEndpointsProtocol=https;AccountName=hhdandroidtest;AccountKey=zJpcXJ...;EndpointSuffix=core.windows.net";
-        HhdLog.init(getBaseContext(), MyAzureSecureKeys.AZURE_STORAGE_CONNECTION_STRING);
         HhdSampleUiHelper uiHelper = new HhdSampleUiHelper(this);
 
         uiHelper.addSimpleBtn("write log to azure hello world", (View v) -> {

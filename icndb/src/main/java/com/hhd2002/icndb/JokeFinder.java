@@ -32,6 +32,6 @@ public class JokeFinder {
             }
         };
 
-        task.execute(first, last);
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, first, last);
     }
 }

@@ -10,7 +10,9 @@ import android.view.View;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.hhd2002.androidbaselib.HhdSampleUiHelper;
+import com.hhd2002.androidbaselib.HhdUtil;
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
+import com.hhd2002.androidbaselib.funcdelegate.IHhdFuncDelegate;
 import com.hhd2002.androidbaselib.log.HhdLog;
 import com.hhd2002.hhdtest.R;
 import com.hhd2002.icndb.IcndbApis;
@@ -42,7 +44,6 @@ public class FcmTestActivity
             @Override
             public void onClick(View v) {
                 _token = FirebaseInstanceId.getInstance().getToken();
-                HhdLog.d("addSimpleBtn getToken _token : %s", _token);
                 _uiHelper.writeLog(String.format("addSimpleBtn getToken _token : %s", _token));
             }
         });
@@ -51,10 +52,9 @@ public class FcmTestActivity
             @Override
             public void onClick(View v) {
 
-                @SuppressLint("StaticFieldLeak")
-                AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+                HhdUtil.runOnBgThread(new HhdUtil.AsyncRunnable(FcmTestActivity.this) {
                     @Override
-                    protected Void doInBackground(Void... voids) {
+                    public void run() {
 
                         try {
                             Thread.sleep(5000);
@@ -77,11 +77,14 @@ public class FcmTestActivity
                             e.printStackTrace();
                         }
 
-                        return null;
+                        this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                _uiHelper.writeLog("IFcmApis.SendRequest 발송됨.");
+                            }
+                        });
                     }
-                };
-
-                task.execute();
+                });
             }
         });
     }

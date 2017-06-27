@@ -2,6 +2,7 @@ package com.hhd2002.androidbaselib;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -17,7 +19,10 @@ import android.text.format.Time;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
+
+import com.hhd2002.androidbaselib.funcdelegate.IHhdFuncDelegate;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -336,6 +341,41 @@ public class HhdUtil {
         String str = sdf.format(now);
         return str;
     }
+
+
+
+    public static abstract class AsyncRunnable {
+
+        private Activity _activity = null;
+
+        public AsyncRunnable() {
+        }
+
+        public AsyncRunnable(Activity activity) {
+            _activity = activity;
+        }
+
+        public final void runOnUiThread(Runnable action) {
+            if (_activity == null)
+                return;
+
+            _activity.runOnUiThread(action);
+        }
+
+        public abstract void run();
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    public static void runOnBgThread(AsyncRunnable asyncRunnable) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                asyncRunnable.run();
+                return null;
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
 
 
     private static class SPrefModel {

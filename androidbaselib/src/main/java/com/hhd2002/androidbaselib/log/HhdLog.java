@@ -134,7 +134,7 @@ public class HhdLog {
         Date now = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd|HH:mm:ss");
         String nowDateTimeStr = sdf.format(now);
-        log = String.format("CALL[tag]TID[%04d] %s", tag, tid, log);
+        log = String.format("CALL[%s]TID[%04d] %s", tag, tid, log);
         String decoLog = String.format("[%s][%s]%s", logLevel, nowDateTimeStr, log);
 
         switch (logLevel) {
