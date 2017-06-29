@@ -164,19 +164,23 @@ public class HhdLog {
         _logCache4Azure.add(laLog);
     }
 
-    public static void e(String msg) {
-        Log.e("", msg);
+    @SuppressLint("HardwareIds")
+    public static void e(String format, Object... args) {
+        _writeLogAsync("ERROR", format, args);
     }
 
-    public static void i(String msg) {
-        Log.i("", msg);
+    @SuppressLint("HardwareIds")
+    public static void i(String format, Object... args) {
+        _writeLogAsync("INFOR", format, args);
     }
 
-    public static void v(String msg) {
-        Log.v("", msg);
+    @SuppressLint("HardwareIds")
+    public static void v(String format, Object... args) {
+        _writeLogAsync("VERBO", format, args);
     }
 
-    public static void w(String msg) {
-        Log.w("", msg);
+    @SuppressLint("HardwareIds")
+    public static void w(String format, Object... args) {
+        _writeLogAsync("WARNI", format, args);
     }
 }

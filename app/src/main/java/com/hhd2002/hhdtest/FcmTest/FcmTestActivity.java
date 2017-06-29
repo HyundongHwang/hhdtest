@@ -1,25 +1,17 @@
 package com.hhd2002.hhdtest.FcmTest;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.hhd2002.androidbaselib.HhdAsyncTask;
 import com.hhd2002.androidbaselib.HhdSampleUiHelper;
-import com.hhd2002.androidbaselib.HhdUtil;
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
-import com.hhd2002.androidbaselib.funcdelegate.IHhdFuncDelegate;
-import com.hhd2002.androidbaselib.log.HhdLog;
-import com.hhd2002.hhdtest.R;
-import com.hhd2002.icndb.IcndbApis;
 
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Call;
 
@@ -48,14 +40,13 @@ public class FcmTestActivity
             }
         });
 
-        _uiHelper.addSimpleBtn("send push notification", new View.OnClickListener() {
+        _uiHelper.addSimpleBtn("send fcm message(data type)", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                HhdUtil.runOnBgThread(new HhdUtil.AsyncRunnable(FcmTestActivity.this) {
+                new HhdAsyncTask() {
                     @Override
-                    public void run() {
-
+                    protected void doInBackground() {
                         try {
                             Thread.sleep(5000);
                         } catch (Exception e) {
@@ -68,7 +59,6 @@ public class FcmTestActivity
                         HashMap<String, String> data = new HashMap<>();
                         req.data = data;
                         data.put("msg", "안녕하세요");
-
                         Call<IFcmApis.SendResponse> call = api.PostSend(req);
 
                         try {
@@ -76,18 +66,18 @@ public class FcmTestActivity
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
-                        this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                _uiHelper.writeLog("IFcmApis.SendRequest 발송됨.");
-                            }
-                        });
                     }
-                });
+
+                    @Override
+                    protected void onPostExecute() {
+                        super.onPostExecute();
+                        _uiHelper.writeLog("IFcmApis.SendRequest 발송됨.");
+                    }
+                }.execute();
             }
         });
     }
+
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -98,7 +88,6 @@ public class FcmTestActivity
     private void _processIntent(Intent intent) {
         if (intent.getExtras() == null)
             return;
-
 
 
         String from = intent.getExtras().getString("from");
