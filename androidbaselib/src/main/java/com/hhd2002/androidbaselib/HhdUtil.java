@@ -19,6 +19,9 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -338,6 +341,15 @@ public class HhdUtil {
     }
 
 
+    public static Gson getGson() {
+        //noinspection UnnecessaryLocalVariable
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson;
+    }
+    
+    
+    
+    
 
     private static class SPrefModel {
         private String key;

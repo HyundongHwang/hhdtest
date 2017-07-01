@@ -84,7 +84,7 @@
 
         <activity android:name=".ServiceTest.MyServiceActivity" />
         <activity android:name=".FcmTest.FcmTestActivity" />
-
+ 
         <service
             android:name=".ServiceTest.MyService"
             android:enabled="true"

@@ -1,5 +1,6 @@
 package com.hhd2002.hhdtest;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -17,9 +18,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
-import com.hhd2002.androidbaselib.HhdMultiViewTypeAdapter;
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
+import com.hhd2002.androidbaselib.adapters.HhdMultiViewTypeAdapter;
 
 import java.util.ArrayList;
 
@@ -27,9 +27,9 @@ public class MainActivity
         extends AppCompatActivity
         implements IHhdSampleActivity {
 
-    private ListView lvObj;
     private SwipeRefreshLayout vgPtr;
 
+    @SuppressLint("HandlerLeak")
     private Handler onPtrFinished = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -42,9 +42,9 @@ public class MainActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main_2);
-
+        
         vgPtr = (SwipeRefreshLayout) findViewById(R.id.vg_ptr);
-        lvObj = (ListView) findViewById(R.id.lv_obj);
+        ListView lvObj = (ListView) findViewById(R.id.lv_obj);
 
         vgPtr.setColorSchemeColors(0xff5b79c2);
 
@@ -150,7 +150,7 @@ public class MainActivity
     }
 
 
-    public static interface AdapterListener {
-        public void onClickItem(ItemModel itemModel);
+    public interface AdapterListener {
+        void onClickItem(ItemModel itemModel);
     }
 }

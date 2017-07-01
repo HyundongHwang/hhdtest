@@ -1,6 +1,5 @@
 package com.hhd2002.hhdtest;
 
-import android.app.Application;
 import android.support.multidex.MultiDexApplication;
 
 import com.hhd2002.androidbaselib.log.HhdLog;

@@ -1,4 +1,4 @@
-package com.hhd2002.androidbaselib;
+package com.hhd2002.androidbaselib.adapters;
 
 import android.content.Context;
 import android.view.View;
