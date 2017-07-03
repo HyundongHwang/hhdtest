@@ -1,6 +1,7 @@
-package com.hhd2002.hhdtest.FcmTest;
+package com.hhd2002.hhdtest.FcmTest.apis;
 
 import com.hhd2002.androidbaselib.HhdRetrofitUtils;
+import com.hhd2002.hhdtest.MySecureKeys;
 
 import java.util.ArrayList;
 
@@ -51,7 +52,7 @@ public interface IFcmApis {
             "Content-Type: application/json",
 
             //AAAAnlu9ieg:APA91...
-            "Authorization: key=" + MyFcmSecureKeys.FCM_SERVER_KEY
+            "Authorization: key=" + MySecureKeys.FCM_SERVER_KEY
     })
     @POST("fcm/send")
     Call<IFcmApis.SendResponse> PostSend(

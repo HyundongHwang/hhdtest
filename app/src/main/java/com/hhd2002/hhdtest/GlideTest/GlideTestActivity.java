@@ -14,12 +14,12 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.widget.EditText;
 
-import com.google.gson.Gson;
 import com.hhd2002.androidbaselib.HhdAsyncTask;
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
 import com.hhd2002.androidbaselib.adapters.HhdRecyclerViewAdapter;
 import com.hhd2002.androidbaselib.adapters.HhdRecyclerViewHolder;
 import com.hhd2002.androidbaselib.funcdelegate.IHhdFuncDelegateIn;
+import com.hhd2002.hhdtest.GlideTest.apis.IDaumApis;
 import com.hhd2002.hhdtest.GlideTest.models.GlideTestImage;
 import com.hhd2002.hhdtest.R;
 
@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import retrofit2.Call;
 
 
 public class GlideTestActivity
@@ -36,10 +37,8 @@ public class GlideTestActivity
         implements IHhdSampleActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1000;
-    //    private CustomAdapter _adapter;
     private HhdRecyclerViewAdapter _adapter;
     private EditText etSearch;
-    private HhdRecyclerViewAdapter adapter1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +70,7 @@ public class GlideTestActivity
                 null);
 
         rvObj.setAdapter(_adapter);
-        
+
         etSearch = (EditText) findViewById(R.id.et_search);
         findViewById(R.id.btn_naver).setOnClickListener(v -> onClickNaver());
         findViewById(R.id.btn_daum).setOnClickListener(v -> onClickDaum());
@@ -263,27 +262,17 @@ public class GlideTestActivity
             @Override
             protected void doInBackground() {
                 try {
-                    OkHttpClient client = new OkHttpClient();
-                    String searchStr = URLEncoder.encode(GlideTestActivity.this.etSearch.getText().toString(), "UTF-8");
-                    String url = "http://apis.daum.net/search/image?output=json&apikey=12134b96690b90ec58897cb715d57a1e&q=" + searchStr + "&result=20&pageno=1";
-
-                    Request req = new Request
-                            .Builder()
-                            .url(url)
-                            .build();
-
-                    Response res = client.newCall(req).execute();
-                    String resStr = res.body().string();
-                    DaumModels daumModels = new Gson().fromJson(resStr, DaumModels.class);
+                    IDaumApis apis = IDaumApis.create();
+                    Call<IDaumApis.SearchImageResponse> call = apis.GetSearchImage(GlideTestActivity.this.etSearch.getText().toString(), 20, 1);
+                    retrofit2.Response<IDaumApis.SearchImageResponse> res = call.execute();
                     _adapter.items.clear();
 
-                    for (DaumModels.Item item : daumModels.channel.item) {
+                    for (IDaumApis.SearchImageResponse.Item item : res.body().channel.item) {
                         GlideTestImage newImage = new GlideTestImage();
                         newImage.sourceType = GlideTestImage.SourceTypes.Web;
                         _adapter.items.add(newImage);
                         newImage.thumbnailUri = item.thumbnail;
                         newImage.realUri = item.image;
-                        //newItem.link = item.link;
                         newImage.width = item.width;
                         newImage.height = item.height;
                     }
@@ -302,6 +291,6 @@ public class GlideTestActivity
 
     @Override
     public String getSampleDesc() {
-        return "Glide, RecyclerView, OkHttpClient, XML, XStream, AsyncExecutor, Json, Naver OpenAPI, Daum OpenAPI";
+        return "Glide, RecyclerView, Retrofit, XML, XStream, AsyncExecutor, Json, Naver OpenAPI, Daum OpenAPI";
     }
 }

@@ -1,4 +1,4 @@
-package com.hhd2002.hhdtest.GlideTest;
+package com.hhd2002.hhdtest.GlideTest.models;
 
 import java.util.ArrayList;
 
