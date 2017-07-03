@@ -1,29 +1,22 @@
 package com.hhd2002.hhdtest.FcmTest;
 
+import com.hhd2002.androidbaselib.HhdRetrofitUtils;
+
 import java.util.ArrayList;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+
 import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
- * Created by hhd on 2017-06-27.
+ * Created by hhd on 2017-07-03.
  */
 
 public interface IFcmApis {
 
-
-
-
-
-
-
     class SendRequest {
-        public Notification notification;
+        public IFcmApis.SendRequest.Notification notification;
         public String to;
         public String collapse_key;
         public Object data;
@@ -41,32 +34,18 @@ public interface IFcmApis {
         public int success;
         public int failure;
         public int canonical_ids;
-        public ArrayList<Result> results;
+        public ArrayList<IFcmApis.SendResponse.Result> results;
 
         class Result {
             public String message_id;
         }
     }
-
-
+    
+    
     static IFcmApis create() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .build();
-
-        IFcmApis apis = new Retrofit.Builder()
-                .baseUrl("https://fcm.googleapis.com")
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build().create(IFcmApis.class);
-
-        return apis;
+        IFcmApis iFcmApis = HhdRetrofitUtils.create("https://fcm.googleapis.com", IFcmApis.class);
+        return iFcmApis;
     }
-
-
 
     @Headers({
             "Content-Type: application/json",
@@ -77,10 +56,18 @@ public interface IFcmApis {
     @POST("fcm/send")
     Call<IFcmApis.SendResponse> PostSend(
             @Body IFcmApis.SendRequest body);
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 //다음은 알림 메시지입니다.
@@ -149,3 +136,4 @@ public interface IFcmApis {
 //Transfer-Encoding: chunked
 //
 //{"multicast_id":7398904813536975373,"success":1,"failure":0,"canonical_ids":0,"results":[{"message_id":"0:1498487334945940%20fe25bf66d6cf16"}]}
+
