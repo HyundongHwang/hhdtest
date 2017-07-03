@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.hhd2002.androidbaselib.HhdMultiViewTypeAdapter;
+import com.hhd2002.androidbaselib.adapters.HhdListViewHolder;
 import com.hhd2002.hhdtest.R;
 
-public class RedVh extends HhdMultiViewTypeAdapter.IViewHolderBase {
+public class RedVh extends HhdListViewHolder {
     public RedVh() {
     }
 

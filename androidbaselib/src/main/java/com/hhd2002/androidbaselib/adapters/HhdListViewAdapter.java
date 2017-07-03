@@ -8,26 +8,20 @@ import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 
-public class HhdMultiViewTypeAdapter extends BaseAdapter {
 
-
-    public static abstract class IViewHolderBase {
-        public Object adapterListener;
-        public abstract View createNewView(Context context, ViewGroup parent);
-        public abstract void updateUiByItem(int position, View convertView, ViewGroup parent, Object item);
-    }
-
+public class HhdListViewAdapter extends BaseAdapter {
+    
 
     public ArrayList<Object> items = new ArrayList<>();
 
 
     private Context context;
     private ArrayList<Class> itemTypes = new ArrayList<>();
-    private ArrayList<Class<? extends IViewHolderBase>> vhTypes = new ArrayList<>();
+    private ArrayList<Class<? extends HhdListViewHolder>> vhTypes = new ArrayList<>();
     private Object adapterListener;
 
 
-    public HhdMultiViewTypeAdapter(Context context, ArrayList<Class> itemTypes, ArrayList<Class<? extends IViewHolderBase>> vhTypes, Object adapterListener) {
+    public HhdListViewAdapter(Context context, ArrayList<Class> itemTypes, ArrayList<Class<? extends HhdListViewHolder>> vhTypes, Object adapterListener) {
         this.context = context;
         this.itemTypes = new ArrayList<>(itemTypes);
         this.vhTypes = new ArrayList<>(vhTypes);
@@ -74,8 +68,8 @@ public class HhdMultiViewTypeAdapter extends BaseAdapter {
         Object item = getItem(position);
         Class itemType = item.getClass();
         int idx = itemTypes.indexOf(itemType);
-        Class<? extends IViewHolderBase> vhType = vhTypes.get(idx);
-        IViewHolderBase vh = null;
+        Class<? extends HhdListViewHolder> vhType = vhTypes.get(idx);
+        HhdListViewHolder vh = null;
 
         if (convertView == null) {
             try {
@@ -87,7 +81,7 @@ public class HhdMultiViewTypeAdapter extends BaseAdapter {
                 e.printStackTrace();
             }
         } else {
-            vh = (IViewHolderBase) convertView.getTag();
+            vh = (HhdListViewHolder) convertView.getTag();
         }
 
         vh.updateUiByItem(position, convertView, parent, item);

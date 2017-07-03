@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.hhd2002.androidbaselib.HhdMultiViewTypeAdapter;
+import com.hhd2002.androidbaselib.adapters.HhdListViewHolder;
 import com.hhd2002.hhdtest.R;
 
-public class GreenVh extends HhdMultiViewTypeAdapter.IViewHolderBase {
+public class GreenVh extends HhdListViewHolder {
     public GreenVh() {
     }
 

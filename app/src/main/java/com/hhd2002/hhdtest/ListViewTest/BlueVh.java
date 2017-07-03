@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.hhd2002.androidbaselib.HhdMultiViewTypeAdapter;
+import com.hhd2002.androidbaselib.adapters.HhdListViewHolder;
 import com.hhd2002.hhdtest.R;
 
-public class BlueVh extends HhdMultiViewTypeAdapter.IViewHolderBase {
+public class BlueVh extends HhdListViewHolder {
     public BlueVh() {
     }
 

@@ -71,17 +71,8 @@ public class GlideTestActivity
                 null);
 
         rvObj.setAdapter(_adapter);
-
-
-//        _adapter = new CustomAdapter((GlideTestImage item) -> {
-//            startActivity(GlideTestDetailActivity.newIntent(this, item));
-//        });
-
-//        rvObj.setAdapter(_adapter);
-
-
+        
         etSearch = (EditText) findViewById(R.id.et_search);
-
         findViewById(R.id.btn_naver).setOnClickListener(v -> onClickNaver());
         findViewById(R.id.btn_daum).setOnClickListener(v -> onClickDaum());
         findViewById(R.id.btn_local).setOnClickListener(v -> onClickLocal());

@@ -19,7 +19,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
-import com.hhd2002.androidbaselib.adapters.HhdMultiViewTypeAdapter;
+import com.hhd2002.androidbaselib.adapters.HhdListViewAdapter;
+import com.hhd2002.androidbaselib.adapters.HhdListViewHolder;
 
 import java.util.ArrayList;
 
@@ -53,10 +54,10 @@ public class MainActivity
         ArrayList<Class> itemTypes = new ArrayList<>();
         itemTypes.add(ItemModel.class);
 
-        ArrayList<Class<? extends HhdMultiViewTypeAdapter.IViewHolderBase>> vhTypes = new ArrayList<>();
+        ArrayList<Class<? extends HhdListViewHolder>> vhTypes = new ArrayList<>();
         vhTypes.add(ItemVh.class);
 
-        HhdMultiViewTypeAdapter adapter = new HhdMultiViewTypeAdapter(
+        HhdListViewAdapter adapter = new HhdListViewAdapter(
                 this,
                 itemTypes,
                 vhTypes,
@@ -106,7 +107,7 @@ public class MainActivity
     }
 
 
-    public static class ItemVh extends HhdMultiViewTypeAdapter.IViewHolderBase {
+    public static class ItemVh extends HhdListViewHolder {
         private View convertView;
         private ItemModel itemModel;
         private TextView tvTitle;

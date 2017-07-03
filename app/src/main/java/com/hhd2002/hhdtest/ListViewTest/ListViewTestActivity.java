@@ -5,8 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
 
-import com.hhd2002.androidbaselib.HhdMultiViewTypeAdapter;
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
+import com.hhd2002.androidbaselib.adapters.HhdListViewAdapter;
+import com.hhd2002.androidbaselib.adapters.HhdListViewHolder;
 import com.hhd2002.hhdtest.R;
 
 import java.util.ArrayList;
@@ -103,12 +104,12 @@ public class ListViewTestActivity
         itemTypes.add(GreenItem.class);
         itemTypes.add(BlueItem.class);
 
-        ArrayList<Class<? extends HhdMultiViewTypeAdapter.IViewHolderBase>> vhTypes = new ArrayList<>();
+        ArrayList<Class<? extends HhdListViewHolder>> vhTypes = new ArrayList<>();
         vhTypes.add(RedVh.class);
         vhTypes.add(GreenVh.class);
         vhTypes.add(BlueVh.class);
 
-        HhdMultiViewTypeAdapter adapter = new HhdMultiViewTypeAdapter(this, itemTypes, vhTypes, new AdapterListener() {
+        HhdListViewAdapter adapter = new HhdListViewAdapter(this, itemTypes, vhTypes, new AdapterListener() {
             @Override
             public void onClickItem(Object item) {
                 Log.i("hhddebug", "AdapterListener.onClickItem item.getClass().getName() : " + item.getClass().getName());
