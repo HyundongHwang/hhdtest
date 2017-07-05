@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/btn_naver"
@@ -21,10 +21,10 @@
         android:id="@+id/et_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="카카오"
         android:layout_marginLeft="200dp"
         android:layout_marginTop="5dp"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:text="카카오" />
 
     <Button
         android:id="@+id/btn_local"
@@ -34,10 +34,18 @@
         android:layout_marginTop="50dp"
         android:text="local" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_obj"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srLayout"
+        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp" />
+        android:layout_height="match_parent">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_obj"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp" />
+        
+    </android.support.v4.widget.SwipeRefreshLayout>
+    
 </FrameLayout>

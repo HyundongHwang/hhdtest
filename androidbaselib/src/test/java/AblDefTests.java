@@ -1,14 +1,6 @@
-import com.hhd2002.androidbaselib.log.AzureTableLogEntity;
-import com.hhd2002.androidbaselib.log.HhdLog;
-
 import junit.framework.Assert;
 
 import org.junit.Test;
-
-import java.util.ArrayDeque;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**
