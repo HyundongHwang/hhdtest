@@ -1,6 +1,6 @@
 package com.hhd2002.androidbaselib;
 
-public class ColorUtil {
+public class HhdColorUtils {
 
     public static int colorWithAlpha(int color, float alpha) {
         final int currentAlpha = (color >> 24) & 0xFF;
@@ -8,6 +8,6 @@ public class ColorUtil {
         return color & (0xFFFFFF | newAlpha << 24);
     }
 
-    private ColorUtil() {
+    private HhdColorUtils() {
     }
 }

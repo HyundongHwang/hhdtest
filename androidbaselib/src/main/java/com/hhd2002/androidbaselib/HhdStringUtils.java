@@ -11,14 +11,19 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringUtils {
+public class HhdStringUtils {
 
     private static DecimalFormat df;
 
-    private StringUtils() {
+    private HhdStringUtils() {
 
     }
 
+    public static boolean isStringNullOrEmpty(String str) {
+        boolean result = (str == null || str.equals(""));
+        return result;
+    }
+    
     public static int parseHex(String hexString) {
         int value = convertHexToDec(hexString.charAt(0));
         for (int i = 1; i < hexString.length(); i++) {
@@ -328,5 +333,16 @@ public class StringUtils {
         final Matcher matcher = WEB_URI_PATTERN.matcher(source);
         return matcher.find() && TextUtils.isEmpty(matcher.group()) == false;
     }
+
+    public static String convertBytesToUtf8String(byte[] buf) {
+        String str = new String(buf, Charset.forName("utf-8"));
+        return str;
+    }
+
+    public static byte[] convertUtf8StringToBytes(String str) {
+        byte[] tmpBuf = str.getBytes(Charset.forName("utf-8"));
+        return tmpBuf;
+    }
+
 }
 

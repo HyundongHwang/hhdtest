@@ -5,8 +5,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.hhd2002.androidbaselib.DeviceUtils;
-import com.hhd2002.androidbaselib.HhdUtil;
+import com.hhd2002.androidbaselib.HhdDeviceUtils;
+import com.hhd2002.androidbaselib.HhdStringUtils;
 import com.microsoft.azure.storage.CloudStorageAccount;
 import com.microsoft.azure.storage.table.CloudTable;
 import com.microsoft.azure.storage.table.CloudTableClient;
@@ -38,7 +38,7 @@ public class HhdLog {
         _context = context;
         _azureStorageConnectionString = azureStorageConnectionString;
 
-        if (HhdUtil.isStringNullOrEmpty(_azureStorageConnectionString))
+        if (HhdStringUtils.isStringNullOrEmpty(_azureStorageConnectionString))
             return;
 
 
@@ -48,7 +48,7 @@ public class HhdLog {
                 try {
                     CloudStorageAccount storageAccount = CloudStorageAccount.parse(_azureStorageConnectionString);
                     CloudTableClient tableClient = storageAccount.createCloudTableClient();
-                    String hwid = DeviceUtils.getHwId(_context);
+                    String hwid = HhdDeviceUtils.getHwId(_context);
                     Date now = new Date();
                     SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
                     String dateStr = sdf.format(now);
@@ -95,7 +95,7 @@ public class HhdLog {
                     try {
                         CloudStorageAccount storageAccount = CloudStorageAccount.parse(_azureStorageConnectionString);
                         CloudTableClient tableClient = storageAccount.createCloudTableClient();
-                        String hwid = DeviceUtils.getHwId(_context);
+                        String hwid = HhdDeviceUtils.getHwId(_context);
                         Date now = new Date();
                         SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
                         String dateStr = sdf.format(now);

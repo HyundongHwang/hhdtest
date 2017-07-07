@@ -12,7 +12,7 @@ import android.view.WindowManager;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import com.hhd2002.androidbaselib.HhdAsyncTask;
-import com.hhd2002.androidbaselib.HhdUtil;
+import com.hhd2002.androidbaselib.HhdUtils;
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
 import com.hhd2002.hhdtest.GlideTest.models.GlideTestImage;
 import com.hhd2002.hhdtest.R;
@@ -27,7 +27,7 @@ public class GlideTestDetailActivity
     private GlideTestImage _img;
 
     public static Intent newIntent(Context context, GlideTestImage img) {
-        String imgStr = HhdUtil.getGson().toJson(img);
+        String imgStr = HhdUtils.getGson().toJson(img);
 
         //noinspection UnnecessaryLocalVariable
         Intent newIntent = new Intent(context, GlideTestDetailActivity.class)
@@ -45,7 +45,7 @@ public class GlideTestDetailActivity
         setContentView(R.layout.layout_glide_test_detail);
         imgObj = (SubsamplingScaleImageView) findViewById(R.id.img_obj);
         String dataStr = getIntent().getStringExtra("DATA");
-        _img = HhdUtil.getGson().fromJson(dataStr, GlideTestImage.class);
+        _img = HhdUtils.getGson().fromJson(dataStr, GlideTestImage.class);
         imgObj.setMinScale(0.2f);
         imgObj.setMaxScale(5.0f);
     }

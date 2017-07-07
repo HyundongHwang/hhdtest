@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-public class CollectionUtil {
+public class HhdCollectionUtils {
 
-    private CollectionUtil() {
+    private HhdCollectionUtils() {
     }
 
     public static boolean contains(Object[] array, Object target) {

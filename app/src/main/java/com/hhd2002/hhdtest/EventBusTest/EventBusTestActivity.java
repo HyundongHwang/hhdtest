@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.hhd2002.androidbaselib.HhdUtil;
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
 import com.hhd2002.hhdtest.R;
 

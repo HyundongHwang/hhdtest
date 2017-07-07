@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.hhd2002.androidbaselib.HhdUtil;
+import com.hhd2002.androidbaselib.HhdDeviceUtils;
 import com.hhd2002.androidbaselib.adapters.HhdRecyclerViewHolder;
 import com.hhd2002.androidbaselib.funcdelegate.IHhdFuncDelegateIn;
 import com.hhd2002.hhdtest.GlideTest.models.GlideTestImage;
@@ -46,7 +46,7 @@ public class GlideTestVh extends HhdRecyclerViewHolder {
     @Override
     public void onBindViewHolder(Object item, int position) {
         _item = (GlideTestImage)item;
-        int displayWidth = HhdUtil.getDisplayWidth(this.itemView.getContext()) / 3;
+        int displayWidth = HhdDeviceUtils.getDisplayWidth(this.itemView.getContext()) / 3;
         int displayHeight = displayWidth * _item.height / Math.max(_item.width, 1);
         _imgObj.getLayoutParams().width = displayWidth;
         _imgObj.getLayoutParams().height = displayHeight;

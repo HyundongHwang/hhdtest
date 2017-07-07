@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.hhd2002.androidbaselib.HhdSampleUiHelper;
-import com.hhd2002.androidbaselib.HhdUtil;
+import com.hhd2002.androidbaselib.HhdSprefUtils;
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
 
 import java.util.Date;
@@ -32,27 +32,27 @@ public class KakaoGroupUtilTestActivity
         sampleHelper.addSimpleBtn("SPref save", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HhdUtil.putSPrefString(KakaoGroupUtilTestActivity.this, "1", "일이삼");
-                HhdUtil.putSPrefInt(KakaoGroupUtilTestActivity.this, "2", 2);
-                HhdUtil.putSPrefBoolean(KakaoGroupUtilTestActivity.this, "3", true);
+                HhdSprefUtils.putSPrefString(KakaoGroupUtilTestActivity.this, "1", "일이삼");
+                HhdSprefUtils.putSPrefInt(KakaoGroupUtilTestActivity.this, "2", 2);
+                HhdSprefUtils.putSPrefBoolean(KakaoGroupUtilTestActivity.this, "3", true);
             }
         });
 
         sampleHelper.addSimpleBtn("SPref change", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HhdUtil.putSPrefString(KakaoGroupUtilTestActivity.this, "1", "원투쓰리");
-                HhdUtil.putSPrefInt(KakaoGroupUtilTestActivity.this, "2", 200);
-                HhdUtil.putSPrefBoolean(KakaoGroupUtilTestActivity.this, "3", false);
+                HhdSprefUtils.putSPrefString(KakaoGroupUtilTestActivity.this, "1", "원투쓰리");
+                HhdSprefUtils.putSPrefInt(KakaoGroupUtilTestActivity.this, "2", 200);
+                HhdSprefUtils.putSPrefBoolean(KakaoGroupUtilTestActivity.this, "3", false);
             }
         });
 
         sampleHelper.addSimpleBtn("SPref load", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("hhddebug", "KakaoGroupUtilTestActivity.onClick HhdUtils.getSPrefString(1) : " + HhdUtil.getSPrefString("1"));
-                Log.i("hhddebug", "KakaoGroupUtilTestActivity.onClick HhdUtils.getSPrefInt(2) : " + HhdUtil.getSPrefInt("2"));
-                Log.i("hhddebug", "KakaoGroupUtilTestActivity.onClick HhdUtils.putSPrefBoolean(3) : " + HhdUtil.getSPrefBoolean("3"));
+                Log.i("hhddebug", "KakaoGroupUtilTestActivity.onClick HhdUtils.getSPrefString(1) : " + HhdSprefUtils.getSPrefString("1"));
+                Log.i("hhddebug", "KakaoGroupUtilTestActivity.onClick HhdUtils.getSPrefInt(2) : " + HhdSprefUtils.getSPrefInt("2"));
+                Log.i("hhddebug", "KakaoGroupUtilTestActivity.onClick HhdUtils.putSPrefBoolean(3) : " + HhdSprefUtils.getSPrefBoolean("3"));
             }
         });
     }

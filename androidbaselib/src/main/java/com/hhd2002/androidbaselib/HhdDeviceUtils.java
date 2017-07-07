@@ -1,23 +1,31 @@
 package com.hhd2002.androidbaselib;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Build;
 import android.provider.Settings;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 
-public class DeviceUtils {
+public class HhdDeviceUtils {
 
-    private DeviceUtils() {
+    private static Display display;
+
+    private HhdDeviceUtils() {
     }
 
     @SuppressLint({"NewApi"})
@@ -62,4 +70,38 @@ public class DeviceUtils {
 
         return hwid;
     }
+
+    public static float dip2Pixel(Context context, float dip) {
+        Resources res = context.getResources();
+        float pixel = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, res.getDisplayMetrics());
+        return pixel;
+    }
+
+    @SuppressWarnings("deprecation")
+    public static int getDisplayWidth(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            return getDisplayWidthPostHoneycombMr2(context);
+        } else {
+            return getDisplay(context).getWidth();
+        }
+    }
+
+    public static Display getDisplay(Context context) {
+        if (display == null) {
+            synchronized (HhdUtils.class) {
+                if (display != null)
+                    return display;
+                display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+            }
+        }
+        return display;
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private static int getDisplayWidthPostHoneycombMr2(Context context) {
+        Point size = new Point();
+        getDisplay(context).getSize(size);
+        return size.x;
+    }
+
 }
