@@ -7,25 +7,15 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import java.util.ArrayList;
+
 public class HhdRecyclerLoadMoreViewHolder extends HhdRecyclerViewHolder {
     public HhdRecyclerLoadMoreViewHolder(View itemView) {
         super(itemView);
     }
 
-    public void onBindViewHolder(Object item, int position) {
-
-    }
-
-    public void onCreateViewHolder(
-            Object onEvent,
-            Object onEvent2,
-            Object onEvent3
-    ) {
-
-    }
-
-    public View createConvertView(ViewGroup parent) {
-
+    @Override
+    public View inflateConvertView(ViewGroup parent) {
         Context context = parent.getContext();
         LinearLayout llRoot = new LinearLayout(context);
         parent.addView(llRoot);
@@ -51,5 +41,15 @@ public class HhdRecyclerLoadMoreViewHolder extends HhdRecyclerViewHolder {
         }
 
         return llRoot;
+    }
+
+    @Override
+    public void findAllViews(Object parentCallback) {
+        
+    }
+
+    @Override
+    public void onBindViewHolder() {
+
     }
 }

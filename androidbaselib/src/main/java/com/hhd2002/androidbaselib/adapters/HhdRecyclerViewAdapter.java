@@ -7,8 +7,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hhd2002.androidbaselib.HhdAsyncTask;
-
 import java.util.ArrayList;
 
 /**
@@ -17,36 +15,55 @@ import java.util.ArrayList;
 
 public class HhdRecyclerViewAdapter extends RecyclerView.Adapter {
 
-    public static final int VIEW_TYPE_LOADMORE = 1000;
+    
+    
     public ArrayList<Object> items = new ArrayList<>();
-
     private RecyclerView _rcView;
     private ArrayList<Class> _itemTypes;
     private ArrayList<Class<? extends HhdRecyclerViewHolder>> _vhTypes;
     private IHhdRecyclerViewListener _listener;
-    private Object _onEvent;
-    private Object _onEvent2;
-    private Object _onEvent3;
-    private boolean _isLoading = false;
+    private Object _additionalCallback;
 
+    
+    
+    public HhdRecyclerViewAdapter(
+            RecyclerView rcView,
+            ArrayList<Class> itemTypes,
+            ArrayList<Class<? extends HhdRecyclerViewHolder>> vhTypes,
+            IHhdRecyclerViewListener listener) {
+        
+        _rcView = rcView;
+        _itemTypes = itemTypes;
+        _vhTypes = vhTypes;
+        _listener = listener;
+
+        _init();
+    }
+    
+    
+    
     public HhdRecyclerViewAdapter(
             RecyclerView rcView,
             ArrayList<Class> itemTypes,
             ArrayList<Class<? extends HhdRecyclerViewHolder>> vhTypes,
             IHhdRecyclerViewListener listener,
-            Object onEvent,
-            Object onEvent2,
-            Object onEvent3) {
+            Object additionalCallback) {
+        
         _rcView = rcView;
         _itemTypes = itemTypes;
         _vhTypes = vhTypes;
         _listener = listener;
-        _onEvent = onEvent;
-        _onEvent2 = onEvent2;
-        _onEvent3 = onEvent3;
+        _additionalCallback = additionalCallback;
 
+        _init();
+    }//public HhdRecyclerViewAdapter
+
+    
+    
+    private void _init() {
         _itemTypes.add(HhdRecyclerLoadMoreInfo.class);
         _vhTypes.add(HhdRecyclerLoadMoreViewHolder.class);
+        Handler uiHandler = new Handler();
 
         _rcView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -55,14 +72,13 @@ public class HhdRecyclerViewAdapter extends RecyclerView.Adapter {
 
                 int itemsSize = HhdRecyclerViewAdapter.this.items.size();
                 RecyclerView.LayoutManager lm = recyclerView.getLayoutManager();
-                boolean isLast = false;
 
                 if (lm instanceof LinearLayoutManager) {
                     LinearLayoutManager llm = (LinearLayoutManager) lm;
                     int lvp = llm.findLastCompletelyVisibleItemPosition();
 
                     if (lvp == (itemsSize - 1)) {
-                        isLast = true;
+                        _fireOnLastItem();
                     }
                 } else if (lm instanceof StaggeredGridLayoutManager) {
                     StaggeredGridLayoutManager slm = (StaggeredGridLayoutManager) lm;
@@ -70,56 +86,26 @@ public class HhdRecyclerViewAdapter extends RecyclerView.Adapter {
 
                     for (int i : lcvp) {
                         if (i == (itemsSize - 1)) {
-                            isLast = true;
+                            _fireOnLastItem();
                             break;
                         }
                     }
                 }
 
-                if (isLast &&
-                        !_isLoading &&
-                        _listener.canLoadMore()) {
+            }//public void onScrolled
 
-                    _isLoading = true;
-                    HhdRecyclerViewAdapter.this.items.add(new HhdRecyclerLoadMoreInfo());
-
-                    new Handler().post(new Runnable() {
-                        @Override
-                        public void run() {
-                            HhdRecyclerViewAdapter.this.notifyDataSetChanged();
-
-                            new HhdAsyncTask() {
-
-                                @Override
-                                protected void doInBackground() {
-                                    _listener.onLoadMore();
-                                    Object loadMoreInfo = null;
-
-                                    for (int i = HhdRecyclerViewAdapter.this.items.size() - 1; i >= 0; i--) {
-                                        Object item = HhdRecyclerViewAdapter.this.items.get(i);
-                                        
-                                        if (item instanceof HhdRecyclerLoadMoreInfo) {
-                                            HhdRecyclerViewAdapter.this.items.remove(item);
-                                        }
-                                    }
-
-                                    _isLoading = false;
-                                }
-
-                                @Override
-                                protected void onPostExecute() {
-                                    super.onPostExecute();
-                                    HhdRecyclerViewAdapter.this.notifyDataSetChanged();
-                                }
-                            }.execute();
-
-
-                        }
-                    });
-                }
+            private void _fireOnLastItem() {
+                uiHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        _listener.onLastItem();        
+                    }
+                }, 100);
             }
-        });
+            
+        }); //_rcView.addOnScrollListener
     }
+
 
     @Override
     public int getItemCount() {
@@ -130,9 +116,30 @@ public class HhdRecyclerViewAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         try {
             Class<? extends HhdRecyclerViewHolder> vhType = _vhTypes.get(viewType);
-            View convertView = vhType.getDeclaredConstructor(View.class).newInstance(parent).createConvertView(parent);
-            HhdRecyclerViewHolder vh = vhType.getDeclaredConstructor(View.class).newInstance(convertView);
-            vh.onCreateViewHolder(_onEvent, _onEvent2, _onEvent3);
+
+            View convertView =
+                    vhType.getDeclaredConstructor(View.class)
+                            .newInstance(parent)
+                            .inflateConvertView(parent);
+
+            HhdRecyclerViewHolder vh =
+                    vhType.getDeclaredConstructor(View.class)
+                            .newInstance(convertView);
+
+            vh.findAllViews(_additionalCallback);
+            
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    
+                    _listener.onClickItem(
+                            vh.item, 
+                            vh.position, 
+                            convertView);
+                    
+                }
+            });
+
             return vh;
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,7 +152,9 @@ public class HhdRecyclerViewAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Object item = items.get(position);
         HhdRecyclerViewHolder vh = (HhdRecyclerViewHolder) holder;
-        vh.onBindViewHolder(item, position);
+        vh.item = item;
+        vh.position = position;
+        vh.onBindViewHolder();
     }
 
     @Override

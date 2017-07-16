@@ -95,7 +95,6 @@ public class HhdFileUtils {
             e.printStackTrace();
             return null;
         } finally {
-            closeStreamSafely(is);
             closeStreamSafely(baos);
         }
     }
@@ -179,10 +178,11 @@ public class HhdFileUtils {
 
     public static ArrayList<File> getAllExternalFiles() {
         ArrayList<File> files = new ArrayList<File>();
-        return traverseDir(new File(Environment.getExternalStorageDirectory().getAbsolutePath()), files);
+        traverseDir(new File(Environment.getExternalStorageDirectory().getAbsolutePath()), files);
+        return files;
     }
 
-    private static ArrayList<File> traverseDir(File dir, ArrayList<File> files) {
+    private static void traverseDir(File dir, ArrayList<File> files) {
         File listFile[] = dir.listFiles();
 
         for (int i = 0; i < listFile.length; i++) {
@@ -193,7 +193,5 @@ public class HhdFileUtils {
                 files.add(listFile[i]);
             }
         }
-
-        return files;
     }
 }

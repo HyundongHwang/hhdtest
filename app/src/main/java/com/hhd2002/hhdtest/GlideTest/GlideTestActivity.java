@@ -1,6 +1,7 @@
 package com.hhd2002.hhdtest.GlideTest;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -12,10 +13,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
 import android.widget.EditText;
 
 import com.hhd2002.androidbaselib.HhdAsyncTask;
 import com.hhd2002.androidbaselib.IHhdSampleActivity;
+import com.hhd2002.androidbaselib.adapters.HhdRecyclerLoadMoreInfo;
 import com.hhd2002.androidbaselib.adapters.HhdRecyclerViewAdapter;
 import com.hhd2002.androidbaselib.adapters.HhdRecyclerViewHolder;
 import com.hhd2002.androidbaselib.adapters.IHhdRecyclerViewListener;
@@ -38,6 +41,7 @@ public class GlideTestActivity
         implements IHhdSampleActivity {
 
     public static final int IMAGE_COUNT_PER_API = 20;
+    private boolean _isLoading = false;
 
     private enum ProviderTypes {
         Local,
@@ -95,38 +99,65 @@ public class GlideTestActivity
                 itemTypeList,
                 vhTypeList,
                 new IHhdRecyclerViewListener() {
+
+
                     @Override
-                    public void onLoadMore() {
-                        if (_providerType == ProviderTypes.Local) {
-                            _loadMore100LocalImages();
-                        } else if (_providerType == ProviderTypes.Daum) {
-                            _loadMoreDaumImages();
-                        }
+                    public void onClickItem(Object item, int position, View convertView) {
+                        GlideTestImage gtImage = (GlideTestImage) item;
+                        Context context = convertView.getContext();
+                        startActivity(GlideTestDetailActivity.newIntent(context, gtImage));
                     }
 
                     @Override
-                    public boolean canLoadMore() {
+                    public void onLastItem() {
+                        if (_isLoading)
+                            return;
+
+
+                        _isLoading = true;
+                        boolean canLoadMore = false;
+
                         if (_providerType == ProviderTypes.Local) {
                             ContentResolver cr = getContentResolver();
                             Cursor cur = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null, null, null);
                             int cursorRowCount = cur.getCount();
-                            boolean canLoadMore = (_adapter.items.size() < cursorRowCount);
-                            return canLoadMore;
+                            canLoadMore = (_adapter.items.size() < cursorRowCount);
                         } else if (_providerType == ProviderTypes.Daum) {
-                            return true;
+                            canLoadMore = true;
                         }
 
-                        return false;
+                        if (!canLoadMore)
+                            return;
+
+
+                        HhdRecyclerLoadMoreInfo lmInfo = new HhdRecyclerLoadMoreInfo();
+                        _adapter.items.add(lmInfo);
+                        _adapter.notifyDataSetChanged();
+
+                        new HhdAsyncTask() {
+                            @Override
+                            protected void doInBackground() {
+                                if (_providerType == ProviderTypes.Local) {
+                                    _loadMore100LocalImages();
+                                } else if (_providerType == ProviderTypes.Daum) {
+                                    _loadMoreDaumImages();
+                                }
+                            }
+
+                            @Override
+                            protected void onPostExecute() {
+                                super.onPostExecute();
+                                _adapter.items.remove(lmInfo);
+                                _adapter.notifyDataSetChanged();
+                                _isLoading = false;
+                            }
+                        }.execute();
+
+
                     }
                 },
-                new IHhdFuncDelegateIn<GlideTestImage>() {
-                    @Override
-                    public void execute(GlideTestImage glideTestImage) {
-                        startActivity(GlideTestDetailActivity.newIntent(GlideTestActivity.this, glideTestImage));
-                    }
-                },
-                null,
-                null);
+                null
+        );
 
         rvObj.setAdapter(_adapter);
 
@@ -137,6 +168,11 @@ public class GlideTestActivity
     }
 
     private void onClickLocal() {
+        if (_isLoading)
+            return;
+
+
+        _isLoading = true;
         _providerType = ProviderTypes.Local;
         _adapter.items.clear();
 
@@ -150,6 +186,7 @@ public class GlideTestActivity
             protected void onPostExecute() {
                 super.onPostExecute();
                 _adapter.notifyDataSetChanged();
+                _isLoading = false;
             }
         }.execute();
     }
@@ -276,6 +313,11 @@ public class GlideTestActivity
     }
 
     private void onClickDaum() {
+        if (_isLoading)
+            return;
+
+
+        _isLoading = true;
         _providerType = ProviderTypes.Daum;
         _adapter.items.clear();
 
@@ -289,6 +331,7 @@ public class GlideTestActivity
             protected void onPostExecute() {
                 super.onPostExecute();
                 _adapter.notifyDataSetChanged();
+                _isLoading = false;
             }
         }.execute();
     }
@@ -299,6 +342,11 @@ public class GlideTestActivity
             IDaumApis apis = IDaumApis.create();
             Call<IDaumApis.SearchImageResponse> call = apis.GetSearchImage(GlideTestActivity.this._etSearch.getText().toString(), IMAGE_COUNT_PER_API, pageNum);
             retrofit2.Response<IDaumApis.SearchImageResponse> res = call.execute();
+            Thread.sleep(3000);
+
+            if (res.body() == null)
+                return;
+
 
             for (IDaumApis.SearchImageResponse.Item item : res.body().channel.item) {
                 GlideTestImage newImage = new GlideTestImage();
@@ -309,8 +357,6 @@ public class GlideTestActivity
                 newImage.width = item.width;
                 newImage.height = item.height;
             }
-
-            Thread.sleep(3000);
         } catch (Exception e) {
             e.printStackTrace();
         }
