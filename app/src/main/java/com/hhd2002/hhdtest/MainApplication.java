@@ -2,7 +2,8 @@ package com.hhd2002.hhdtest;
 
 import android.support.multidex.MultiDexApplication;
 
-import com.hhd2002.androidbaselib.log.HhdLog;
+import com.hhd2002.androidbaselib.Log.HhdLog;
+
 
 /**
  * Created by hhd on 2017-06-17.

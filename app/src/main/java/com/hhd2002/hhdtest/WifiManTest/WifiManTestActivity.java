@@ -8,7 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.Formatter;
 
-import com.hhd2002.androidbaselib.HhdSampleUiHelper;
+import com.hhd2002.androidbaselib.SampleUI.HhdSampleUiHelper;
+
 
 /**
  * Created by hhd on 2017-07-12.

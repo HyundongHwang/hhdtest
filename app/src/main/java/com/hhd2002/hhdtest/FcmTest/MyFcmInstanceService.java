@@ -2,7 +2,7 @@ package com.hhd2002.hhdtest.FcmTest;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.hhd2002.androidbaselib.log.HhdLog;
+import com.hhd2002.androidbaselib.Log.HhdLog;
 
 /**
  * Created by hhd on 2017-06-26.

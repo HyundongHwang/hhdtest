@@ -17,7 +17,6 @@
 package com.hhd2002.hhdtest.RealmSamples;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +24,6 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
 import com.hhd2002.hhdtest.R;
 import com.hhd2002.hhdtest.RealmSamples.model.Cat;
 import com.hhd2002.hhdtest.RealmSamples.model.Dog;
@@ -36,8 +34,7 @@ import io.realm.RealmResults;
 import io.realm.Sort;
 
 public class RealmIntroExampleActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     public static final String TAG = RealmIntroExampleActivity.class.getName();
     private LinearLayout rootLayout = null;
@@ -231,8 +228,4 @@ public class RealmIntroExampleActivity
         return status;
     }
 
-    @Override
-    public String getSampleDesc() {
-        return null;
-    }
 }

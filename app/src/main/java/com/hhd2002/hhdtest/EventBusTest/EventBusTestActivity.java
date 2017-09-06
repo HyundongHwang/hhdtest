@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
 import com.hhd2002.hhdtest.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -19,8 +18,7 @@ import org.greenrobot.eventbus.util.ThrowableFailureEvent;
 import java.util.Random;
 
 public class EventBusTestActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     private TextView tvResult;
 
@@ -112,11 +110,6 @@ public class EventBusTestActivity
                 EventBus.getDefault().post(event);
             }
         });
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return "EventBus 심플한 사용법, AsyncExecutor, postSticky, post";
     }
 
     public class MyEvent {

@@ -34,7 +34,6 @@ import com.google.android.gms.auth.GooglePlayServicesAvailabilityException;
 import com.google.android.gms.auth.UserRecoverableAuthException;
 import com.google.android.gms.common.AccountPicker;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
 import com.hhd2002.hhdtest.R;
 
 /**
@@ -45,8 +44,7 @@ import com.hhd2002.hhdtest.R;
  * the {@link com.google.android.gms.auth.GoogleAuthUtil}.
  */
 public class GoogleOAuthTestHelloActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
     private static final String TAG = "PlayHelloActivity";
     private static final String SCOPE = "oauth2:https://www.googleapis.com/auth/userinfo.profile";
     public static final String EXTRA_ACCOUNTNAME = "extra_accountname";
@@ -62,11 +60,6 @@ public class GoogleOAuthTestHelloActivity
     private Type requestType;
 
     public static String TYPE_KEY = "type_key";
-
-    @Override
-    public String getSampleDesc() {
-        return null;
-    }
 
     public static enum Type {FOREGROUND, BACKGROUND, BACKGROUND_WITH_SYNC}
 

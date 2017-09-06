@@ -11,17 +11,15 @@ import android.view.WindowManager;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
-import com.hhd2002.androidbaselib.HhdAsyncTask;
 import com.hhd2002.androidbaselib.HhdUtils;
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
+import com.hhd2002.androidbaselib.Thread.HhdAsyncTask;
 import com.hhd2002.hhdtest.GlideTest.models.GlideTestImage;
 import com.hhd2002.hhdtest.R;
 
 import java.net.URL;
 
 public class GlideTestDetailActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     private SubsamplingScaleImageView imgObj;
     private GlideTestImage _img;
@@ -78,10 +76,5 @@ public class GlideTestDetailActivity
                 imgObj.setImage(ImageSource.bitmap(_bmp));
             }
         }.execute();
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return null;
     }
 }

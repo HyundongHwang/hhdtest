@@ -8,14 +8,13 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.support.v4.app.NotificationBuilderWithBuilderAccessor;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hhd2002.androidbaselib.log.HhdLog;
+import com.hhd2002.androidbaselib.Log.HhdLog;
 import com.hhd2002.hhdtest.R;
 
 import java.util.Map;

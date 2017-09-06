@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.hhd2002.androidbaselib.HhdFileUtils;
-import com.hhd2002.androidbaselib.HhdSampleUiHelper;
 import com.hhd2002.androidbaselib.HhdStringUtils;
+import com.hhd2002.androidbaselib.SampleUI.HhdSampleUiHelper;
 import com.hhd2002.hhdtest.R;
 
 /**

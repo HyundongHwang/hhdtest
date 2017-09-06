@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.hhd2002.androidbaselib.adapters.HhdListViewHolder;
+import com.hhd2002.androidbaselib.Adapters.HhdListViewHolder;
 import com.hhd2002.hhdtest.R;
 
 public class GreenVh extends HhdListViewHolder {

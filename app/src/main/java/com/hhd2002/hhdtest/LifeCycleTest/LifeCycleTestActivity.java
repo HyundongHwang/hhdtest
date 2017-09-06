@@ -6,11 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
-
 public class LifeCycleTestActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,10 +30,5 @@ public class LifeCycleTestActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return "라이프사이클 테스트, 부모 액티비티";
     }
 }

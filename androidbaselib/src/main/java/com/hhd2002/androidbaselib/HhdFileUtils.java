@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Environment;
 
+import com.hhd2002.androidbaselib.Log.HhdLog;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -194,4 +196,56 @@ public class HhdFileUtils {
             }
         }
     }
+
+
+    ////////////////////////////////////////////////////////////////////////////////
+    //context.getCacheDir() : /data/user/0/com.codelink.deltaisland/cache
+    //context.getFilesDir() : /data/user/0/com.codelink.deltaisland/files
+    //context.getObbDir() : /storage/emulated/0/Android/obb/com.codelink.deltaisland
+    //context.getExternalCacheDir() : /storage/emulated/0/Android/data/com.codelink.deltaisland/cache
+    //Environment.getDataDirectory() : /data
+    //Environment.getRootDirectory() : /system
+    //Environment.getDownloadCacheDirectory() : /cache
+    //Environment.getExternalStorageDirectory() : /storage/emulated/0
+    //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS)) : /storage/emulated/0/Alarms
+    //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) : /storage/emulated/0/DCIM
+    //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) : /storage/emulated/0/Documents
+    //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) : /storage/emulated/0/Download
+    //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES) : /storage/emulated/0/Movies
+    //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS) : /storage/emulated/0/Notifications
+    //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) : /storage/emulated/0/Pictures
+    //Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES) : /storage/emulated/0/Ringtones
+    ////////////////////////////////////////////////////////////////////////////////
+    public static void dumpAllDir(Context context) {
+        HhdLog.d("context.getCacheDir() : " + context.getCacheDir());
+        HhdLog.d("context.getFilesDir() : " + context.getFilesDir());
+        HhdLog.d("context.getObbDir() : " + context.getObbDir());
+        HhdLog.d("context.getExternalCacheDir() : " + context.getExternalCacheDir());
+        HhdLog.d("Environment.getDataDirectory() : " + Environment.getDataDirectory());
+        HhdLog.d("Environment.getRootDirectory() : " + Environment.getRootDirectory());
+        HhdLog.d("Environment.getDownloadCacheDirectory() : " + Environment.getDownloadCacheDirectory());
+        HhdLog.d("Environment.getExternalStorageDirectory() : " + Environment.getExternalStorageDirectory());
+        HhdLog.d("Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS)) : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS));
+        HhdLog.d("Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM));
+        HhdLog.d("Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
+        HhdLog.d("Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
+        HhdLog.d("Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES) : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES));
+        HhdLog.d("Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS) : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS));
+        HhdLog.d("Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
+        HhdLog.d("Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES) : " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES));
+    }
+
+
+    public static File createTmpFile(Context context) {
+        try {
+            File cacheDir = context.getExternalCacheDir();
+            File tmpFile = File.createTempFile("tmp", ".tmp", cacheDir);
+            return tmpFile;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 }

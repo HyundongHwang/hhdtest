@@ -16,13 +16,11 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.EditText;
 
-import com.hhd2002.androidbaselib.HhdAsyncTask;
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
-import com.hhd2002.androidbaselib.adapters.HhdRecyclerLoadMoreInfo;
-import com.hhd2002.androidbaselib.adapters.HhdRecyclerViewAdapter;
-import com.hhd2002.androidbaselib.adapters.HhdRecyclerViewHolder;
-import com.hhd2002.androidbaselib.adapters.IHhdRecyclerViewListener;
-import com.hhd2002.androidbaselib.funcdelegate.IHhdFuncDelegateIn;
+import com.hhd2002.androidbaselib.Adapters.HhdRecyclerLoadMoreInfo;
+import com.hhd2002.androidbaselib.Adapters.HhdRecyclerViewAdapter;
+import com.hhd2002.androidbaselib.Adapters.HhdRecyclerViewHolder;
+import com.hhd2002.androidbaselib.Adapters.IHhdRecyclerViewListener;
+import com.hhd2002.androidbaselib.Thread.HhdAsyncTask;
 import com.hhd2002.hhdtest.GlideTest.apis.IDaumApis;
 import com.hhd2002.hhdtest.GlideTest.models.GlideTestImage;
 import com.hhd2002.hhdtest.R;
@@ -37,8 +35,7 @@ import retrofit2.Call;
 
 
 public class GlideTestActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     public static final int IMAGE_COUNT_PER_API = 20;
     private boolean _isLoading = false;
@@ -363,10 +360,6 @@ public class GlideTestActivity
     }
 
 
-    @Override
-    public String getSampleDesc() {
-        return "Glide, RecyclerView, Retrofit, XML, XStream, AsyncExecutor, Json, Naver OpenAPI, Daum OpenAPI";
-    }
 
     private void _Request_READ_EXT_PER() {
         // Here, thisActivity is the current activity

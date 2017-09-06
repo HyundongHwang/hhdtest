@@ -88,7 +88,7 @@ public class HhdDeviceUtils {
 
     public static Display getDisplay(Context context) {
         if (display == null) {
-            synchronized (HhdUtils.class) {
+            synchronized (HhdDeviceUtils.class) {
                 if (display != null)
                     return display;
                 display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
@@ -103,5 +103,4 @@ public class HhdDeviceUtils {
         getDisplay(context).getSize(size);
         return size.x;
     }
-
 }

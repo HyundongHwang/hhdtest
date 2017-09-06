@@ -18,15 +18,14 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
-import com.hhd2002.androidbaselib.adapters.HhdListViewAdapter;
-import com.hhd2002.androidbaselib.adapters.HhdListViewHolder;
+
+import com.hhd2002.androidbaselib.Adapters.HhdListViewAdapter;
+import com.hhd2002.androidbaselib.Adapters.HhdListViewHolder;
 
 import java.util.ArrayList;
 
 public class MainActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     private SwipeRefreshLayout vgPtr;
 
@@ -43,7 +42,7 @@ public class MainActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main_2);
-        
+
         vgPtr = (SwipeRefreshLayout) findViewById(R.id.vg_ptr);
         ListView lvObj = (ListView) findViewById(R.id.lv_obj);
 
@@ -96,12 +95,6 @@ public class MainActivity
         adapter.items.addAll(items);
     }
 
-    @Override
-    public String getSampleDesc() {
-        return "메인 액티비티, ListView, SwipeRefreshLayout";
-    }
-
-
     public static class ItemModel {
         public Class<?> activityType;
     }
@@ -139,14 +132,8 @@ public class MainActivity
                 e.printStackTrace();
             }
 
-            if (newActivity instanceof IHhdSampleActivity) {
-                IHhdSampleActivity sampleActivity = (IHhdSampleActivity) newActivity;
-                tvTitle.setText(sampleActivity.getClass().getSimpleName());
-                tvDesc.setText(sampleActivity.getSampleDesc());
-            } else {
-                tvTitle.setText(itemModel.activityType.getSimpleName());
-                tvDesc.setText(itemModel.activityType.getName());
-            }
+            tvTitle.setText(itemModel.activityType.getSimpleName());
+            tvDesc.setText(itemModel.activityType.getName());
         }
     }
 

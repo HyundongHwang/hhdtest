@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hhd2002.androidbaselib.HhdSampleUiHelper;
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
+import com.hhd2002.androidbaselib.SampleUI.HhdSampleUiHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +13,7 @@ import java.util.HashMap;
  * Created by hhd2002 on 2014. 7. 23..
  */
 public class JsonTestActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,11 +60,6 @@ public class JsonTestActivity
 
         BBB bbb = gson.fromJson(obj2Str, BBB.class);
         hhdSampleUiHelper.writeLog(String.format("bbb : %d", bbb.hashCode()));
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return "json 샘플, ObjectMapper, writeValueAsString, writerWithDefaultPrettyPrinter, readValue";
     }
 }
 

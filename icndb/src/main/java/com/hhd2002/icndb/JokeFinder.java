@@ -2,7 +2,9 @@ package com.hhd2002.icndb;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
-import com.hhd2002.androidbaselib.funcdelegate.IHhdFuncDelegateIn;
+
+import com.hhd2002.androidbaselib.FuncDelegate.IHhdFuncDelegateIn;
+
 import java.io.IOException;
 import retrofit2.Call;
 

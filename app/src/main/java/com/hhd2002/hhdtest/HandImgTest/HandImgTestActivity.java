@@ -8,12 +8,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.*;
 
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
-
 
 public class HandImgTestActivity
-		extends AppCompatActivity
-		implements IHhdSampleActivity {
+		extends AppCompatActivity {
 
 	public class Vertex {
 		float _x;
@@ -83,8 +80,4 @@ public class HandImgTestActivity
 		setContentView(mv);
 	}
 
-    @Override
-    public String getSampleDesc() {
-        return "손그림 그리기";
-    }
 }

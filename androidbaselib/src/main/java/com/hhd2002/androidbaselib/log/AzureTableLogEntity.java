@@ -1,4 +1,4 @@
-package com.hhd2002.androidbaselib.log;
+package com.hhd2002.androidbaselib.Log;
 
 import android.annotation.SuppressLint;
 

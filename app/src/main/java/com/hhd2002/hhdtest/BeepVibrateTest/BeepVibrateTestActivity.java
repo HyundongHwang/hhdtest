@@ -11,12 +11,10 @@ import android.util.*;
 import android.view.*;
 import android.widget.*;
 
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
 import com.hhd2002.hhdtest.R;
 
 public class BeepVibrateTestActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     private Button _btn_sound_pool;
     private Button _btn_audio_manager;
@@ -82,10 +80,5 @@ public class BeepVibrateTestActivity
                 vibrator.vibrate(500);
             }
         });
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return "사운드, 진동 샘플, AlarmManager, getSystemService, PendingIntent, BroadcastReceiver, Calendar";
     }
 }

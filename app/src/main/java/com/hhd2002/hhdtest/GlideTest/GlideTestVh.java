@@ -6,9 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.hhd2002.androidbaselib.Adapters.HhdRecyclerViewHolder;
 import com.hhd2002.androidbaselib.HhdDeviceUtils;
-import com.hhd2002.androidbaselib.adapters.HhdRecyclerViewHolder;
-import com.hhd2002.androidbaselib.funcdelegate.IHhdFuncDelegateIn;
 import com.hhd2002.hhdtest.GlideTest.models.GlideTestImage;
 import com.hhd2002.hhdtest.R;
 

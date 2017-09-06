@@ -10,14 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.hhd2002.androidbaselib.HhdSampleUiHelper;
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
+import com.hhd2002.androidbaselib.SampleUI.HhdSampleUiHelper;
 
 import java.io.File;
 
 public class AttachImageTestActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
 
     private static final int CALL_CAMERA2 = 1;
@@ -56,10 +54,6 @@ public class AttachImageTestActivity
         }
     }
 
-    @Override
-    public String getSampleDesc() {
-        return "ACTION_IMAGE_CAPTURE ACTION_PICK EXTRA_OUTPUT";
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

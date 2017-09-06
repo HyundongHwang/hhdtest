@@ -4,12 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
-
 
 public class LifeCycleChildActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,10 +34,5 @@ public class LifeCycleChildActivity
         outState.putString("1", "하나");
         outState.putString("2", "둘");
         outState.putString("3", "셋");
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return "라이프사이클 테스트, 자식 액티비티";
     }
 }

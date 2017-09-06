@@ -1,4 +1,4 @@
-package com.hhd2002.androidbaselib.bitmap;
+package com.hhd2002.androidbaselib.Image;
 
 import android.annotation.TargetApi;
 import android.graphics.Bitmap;

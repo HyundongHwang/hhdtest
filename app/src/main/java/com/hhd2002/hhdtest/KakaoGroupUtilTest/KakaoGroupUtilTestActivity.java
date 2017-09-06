@@ -5,15 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.hhd2002.androidbaselib.HhdSampleUiHelper;
 import com.hhd2002.androidbaselib.HhdSprefUtils;
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
+import com.hhd2002.androidbaselib.SampleUI.HhdSampleUiHelper;
 
 import java.util.Date;
 
 public class KakaoGroupUtilTestActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     private HhdSampleUiHelper sampleHelper;
 
@@ -55,10 +53,5 @@ public class KakaoGroupUtilTestActivity
                 Log.i("hhddebug", "KakaoGroupUtilTestActivity.onClick HhdUtils.putSPrefBoolean(3) : " + HhdSprefUtils.getSPrefBoolean("3"));
             }
         });
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return "ScrollView, RecyclerView, LinearLayoutManager, 코드로만 구현, RecyclerView.Adapter";
     }
 }

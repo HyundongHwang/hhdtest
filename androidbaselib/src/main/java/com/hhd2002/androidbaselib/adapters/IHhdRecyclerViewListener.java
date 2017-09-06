@@ -1,8 +1,6 @@
-package com.hhd2002.androidbaselib.adapters;
+package com.hhd2002.androidbaselib.Adapters;
 
 import android.view.View;
-
-import java.util.ArrayList;
 
 /**
  * Created by hhd on 2017-07-03.

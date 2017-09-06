@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.hhd2002.androidbaselib.HhdSampleUiHelper;
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
-import com.hhd2002.androidbaselib.log.HhdLog;
+import com.hhd2002.androidbaselib.Log.HhdLog;
+import com.hhd2002.androidbaselib.SampleUI.HhdSampleUiHelper;
 
 public class HhdLogTestActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
 
     @Override
@@ -22,10 +20,5 @@ public class HhdLogTestActivity
         uiHelper.addSimpleBtn("write log to azure hello world", (View v) -> {
             HhdLog.d("hello world");
         });
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return "HhdLog, Azure, TableService";
     }
 }

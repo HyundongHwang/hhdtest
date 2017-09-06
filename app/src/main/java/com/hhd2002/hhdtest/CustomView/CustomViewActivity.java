@@ -8,12 +8,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
 import com.hhd2002.hhdtest.R;
 
 public class CustomViewActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +46,5 @@ public class CustomViewActivity
             canvas.drawCircle(100, 100, 80, this.paint);
             canvas.drawBitmap(this.bit, null, this.dst, null);
         }
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return "커스톰 뷰, onDraw, Canvas, drawColor, drawCircle, drawBitmap, getDrawable, BitmapDrawable";
     }
 }

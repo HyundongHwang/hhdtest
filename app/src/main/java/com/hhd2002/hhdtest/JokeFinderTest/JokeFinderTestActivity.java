@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.hhd2002.androidbaselib.HhdSampleUiHelper;
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
+import com.hhd2002.androidbaselib.SampleUI.HhdSampleUiHelper;
 import com.hhd2002.icndb.JokeFinder;
 
 /**
@@ -13,8 +12,7 @@ import com.hhd2002.icndb.JokeFinder;
  */
 
 public class JokeFinderTestActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +27,5 @@ public class JokeFinderTestActivity
                 });
             });
         });
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return null;
     }
 }

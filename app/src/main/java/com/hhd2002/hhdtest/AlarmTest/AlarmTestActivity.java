@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
 import com.hhd2002.hhdtest.R;
 
 import java.util.Calendar;
@@ -17,8 +16,7 @@ import java.util.Calendar;
  * Created by hhd2002 on 2014. 8. 18..
  */
 public class AlarmTestActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     AlarmManager alarmMgr;
 
@@ -55,8 +53,4 @@ public class AlarmTestActivity
         alarmMgr.cancel(pendIntent);
     }
 
-    @Override
-    public String getSampleDesc() {
-        return "알람서비스 사용, AlarmManager, getSystemService, PendingIntent, BroadcastReceiver, Calendar";
-    }
 }

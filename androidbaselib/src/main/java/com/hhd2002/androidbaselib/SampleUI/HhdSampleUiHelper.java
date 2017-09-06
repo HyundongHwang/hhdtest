@@ -1,4 +1,4 @@
-package com.hhd2002.androidbaselib;
+package com.hhd2002.androidbaselib.SampleUI;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import com.hhd2002.androidbaselib.R;
 
 import java.util.ArrayList;
 

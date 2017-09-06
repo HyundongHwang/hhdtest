@@ -1,4 +1,4 @@
-package com.hhd2002.androidbaselib.adapters;
+package com.hhd2002.androidbaselib.Adapters;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-
-import java.util.ArrayList;
 
 public class HhdRecyclerLoadMoreViewHolder extends HhdRecyclerViewHolder {
     public HhdRecyclerLoadMoreViewHolder(View itemView) {

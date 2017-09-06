@@ -7,9 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.hhd2002.androidbaselib.HhdAsyncTask;
-import com.hhd2002.androidbaselib.HhdSampleUiHelper;
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
+import com.hhd2002.androidbaselib.SampleUI.HhdSampleUiHelper;
+import com.hhd2002.androidbaselib.Thread.HhdAsyncTask;
 import com.hhd2002.hhdtest.FcmTest.apis.IFcmApis;
 
 import java.util.HashMap;
@@ -21,8 +20,7 @@ import retrofit2.Call;
  */
 
 public class FcmTestActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     private String _token;
     private HhdSampleUiHelper _uiHelper;
@@ -99,10 +97,5 @@ public class FcmTestActivity
 
         String notification = intent.getExtras().getString("notification");
         _uiHelper.writeLog(String.format("_processIntent notification : %s", notification));
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return "Fcm, push service, as notification, as data";
     }
 }

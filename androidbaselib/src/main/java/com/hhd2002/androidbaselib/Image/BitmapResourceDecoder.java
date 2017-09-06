@@ -1,4 +1,4 @@
-package com.hhd2002.androidbaselib.bitmap;
+package com.hhd2002.androidbaselib.Image;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

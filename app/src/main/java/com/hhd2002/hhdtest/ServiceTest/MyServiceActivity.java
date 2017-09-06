@@ -5,20 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.hhd2002.androidbaselib.HhdSampleUiHelper;
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
+import com.hhd2002.androidbaselib.SampleUI.HhdSampleUiHelper;
+
 
 /**
  * Created by hhd on 2017-06-23.
  */
 
 public class MyServiceActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
 
     @Override
@@ -54,10 +51,5 @@ public class MyServiceActivity
     protected void onNewIntent(Intent intent) {
         _processIntent(intent);
         super.onNewIntent(intent);
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return "Service, 비동기로 처리";
     }
 }

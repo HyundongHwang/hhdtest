@@ -8,12 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
 import com.hhd2002.hhdtest.R;
 
 public class AbcActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     private EditText edit;
     private Button btn;
@@ -38,11 +36,6 @@ public class AbcActivity
                 tv.setText(str);
             }
         });
-    }
-
-    @Override
-    public String getSampleDesc() {
-        return "기본 테스트 탬플릿, Html.fromHtml";
     }
 }
 

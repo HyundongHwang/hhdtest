@@ -1,4 +1,4 @@
-package com.hhd2002.androidbaselib.adapters;
+package com.hhd2002.androidbaselib.Adapters;
 
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;

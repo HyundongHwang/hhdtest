@@ -5,16 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
 
-import com.hhd2002.androidbaselib.IHhdSampleActivity;
-import com.hhd2002.androidbaselib.adapters.HhdListViewAdapter;
-import com.hhd2002.androidbaselib.adapters.HhdListViewHolder;
+import com.hhd2002.androidbaselib.Adapters.HhdListViewAdapter;
+import com.hhd2002.androidbaselib.Adapters.HhdListViewHolder;
 import com.hhd2002.hhdtest.R;
 
 import java.util.ArrayList;
 
 public class ListViewTestActivity
-        extends AppCompatActivity
-        implements IHhdSampleActivity {
+        extends AppCompatActivity {
 
     private ListView lvObj;
 
@@ -125,9 +123,5 @@ public class ListViewTestActivity
         public void onClickItem(Object item);
     }
 
-    @Override
-    public String getSampleDesc() {
-        return "HhdMultiViewTypeAdapter 샘플";
-    }
 }
 
